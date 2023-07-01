@@ -18,8 +18,6 @@ import javax.swing.JTextArea;
 
 public class CriarEnvelope {
 	static JPanel painelCriaEnv, painelResultados;
-	static JButton botaoArq1, botaoArq2;
-	static JTextArea ceNomeArqEntr1, ceNomeArqEntr2, ceNomeArqSaida1, ceNomeArqSaida2;
 	private static String texto, chaveRSA, algoritmo;
 
 
@@ -43,11 +41,19 @@ public class CriarEnvelope {
 				// Subpainel com a coleta do arquivo de texto
 				JPanel subpainelArqTextoEmClaro = new JPanel();
 
+					// Area com o nome do arquivo
+					JTextArea nomeArqTextoEmClaro = new JTextArea(0, 0);
+					nomeArqTextoEmClaro.setBounds(120,0,200,20);
+					nomeArqTextoEmClaro.setLineWrap(true);
+					nomeArqTextoEmClaro.setEditable(false);
+					nomeArqTextoEmClaro.setBackground(new Color(210, 210, 210));
+					nomeArqTextoEmClaro.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
 					// Escolha do arquivo com a mensagem
-					botaoArq1 = new JButton("Procurar...");
-					botaoArq1.setSize(120, 30);
-					botaoArq1.setVisible(true);
-					botaoArq1.addActionListener(new ActionListener() {
+					JButton botaoArqTextoEmClaro = new JButton("Procurar...");
+					botaoArqTextoEmClaro.setSize(120, 30);
+					botaoArqTextoEmClaro.setVisible(true);
+					botaoArqTextoEmClaro.addActionListener(new ActionListener() {
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							JFileChooser fc = new JFileChooser();
@@ -58,22 +64,14 @@ public class CriarEnvelope {
 								texto = lerConteudo(fc.getSelectedFile());
 
 								String path = fc.getSelectedFile().getPath();
-								ceNomeArqEntr1.setText(path.substring(path.lastIndexOf(System.getProperty("file.separator")) + 1, path.length()));
+								nomeArqTextoEmClaro.setText(path.substring(path.lastIndexOf(System.getProperty("file.separator")) + 1, path.length()));
 							}
 						}
 					});
 
-					// Nome do arquivo
-					ceNomeArqEntr1 = new JTextArea(0, 0);
-					ceNomeArqEntr1.setBounds(120,0,200,20);
-					ceNomeArqEntr1.setLineWrap(true);
-					ceNomeArqEntr1.setEditable(false);
-					ceNomeArqEntr1.setBackground(new Color(210, 210, 210));
-					ceNomeArqEntr1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
 					// Preenche o subpainel com os componentes
-					subpainelArqTextoEmClaro.add(botaoArq1);
-					subpainelArqTextoEmClaro.add(ceNomeArqEntr1);
+					subpainelArqTextoEmClaro.add(botaoArqTextoEmClaro);
+					subpainelArqTextoEmClaro.add(nomeArqTextoEmClaro);
 
 
 				// Preenche o painel principal
@@ -92,11 +90,19 @@ public class CriarEnvelope {
 				// Subpainel com a coleta do arquivo com a chave
 				JPanel subpainelArqChaveRSAdest = new JPanel();
 
+					// Area com o nome do arquivo
+					JTextArea nomeArqChaveRSAdest = new JTextArea(0, 0);
+					nomeArqChaveRSAdest.setBounds(120,0,200,20);
+					nomeArqChaveRSAdest.setLineWrap(true);
+					nomeArqChaveRSAdest.setEditable(false);
+					nomeArqChaveRSAdest.setBackground(new Color(210, 210, 210));
+					nomeArqChaveRSAdest.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
 					// Escolha do arquivo com a chave publica RSA do destinatario
-					botaoArq2 = new JButton("Procurar...");
-					botaoArq2.setSize(120, 30);
-					botaoArq2.setVisible(true);
-					botaoArq2.addActionListener(new ActionListener() {
+					JButton botaoArqChaveRSAdest = new JButton("Procurar...");
+					botaoArqChaveRSAdest.setSize(120, 30);
+					botaoArqChaveRSAdest.setVisible(true);
+					botaoArqChaveRSAdest.addActionListener(new ActionListener() {
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							JFileChooser fc = new JFileChooser();
@@ -107,22 +113,14 @@ public class CriarEnvelope {
 								chaveRSA = lerConteudo(fc.getSelectedFile());
 
 								String path = fc.getSelectedFile().getPath();
-								ceNomeArqEntr2.setText(path.substring(path.lastIndexOf(System.getProperty("file.separator")) + 1, path.length()));
+								nomeArqChaveRSAdest.setText(path.substring(path.lastIndexOf(System.getProperty("file.separator")) + 1, path.length()));
 							}
 						}
 					});
 
-					// Nome do arquivo
-					ceNomeArqEntr2 = new JTextArea(0, 0);
-					ceNomeArqEntr2.setBounds(120,0,200,20);
-					ceNomeArqEntr2.setLineWrap(true);
-					ceNomeArqEntr2.setEditable(false);
-					ceNomeArqEntr2.setBackground(new Color(210, 210, 210));
-					ceNomeArqEntr2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
 					// Preenche o subpainel com os componentes
-					subpainelArqChaveRSAdest.add(botaoArq2);
-					subpainelArqChaveRSAdest.add(ceNomeArqEntr2);
+					subpainelArqChaveRSAdest.add(botaoArqChaveRSAdest);
+					subpainelArqChaveRSAdest.add(nomeArqChaveRSAdest);
 
 
 				// Preenche o painel principal
@@ -136,21 +134,21 @@ public class CriarEnvelope {
 			JPanel painelEscolhaAlg = new JPanel();
 
 			// Escolha de um algoritmo simetrico para o envelope
-			JLabel textoAlg = new JLabel("Algoritmo simétrico:");
+			JLabel labelEscolhaAlg = new JLabel("Algoritmo simétrico:");
 			String opcoesAlgSimetricos[] = {"-", "AES", "DES", "RC4"};
 
-			JComboBox<String> caixaEscolha = new JComboBox<>(opcoesAlgSimetricos);
-			caixaEscolha.setEditable(false);
-			caixaEscolha.addActionListener(new ActionListener() {
+			JComboBox<String> caixaEscolhaAlg = new JComboBox<>(opcoesAlgSimetricos);
+			caixaEscolhaAlg.setEditable(false);
+			caixaEscolhaAlg.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					algoritmo = caixaEscolha.getSelectedItem().toString();
+					algoritmo = caixaEscolhaAlg.getSelectedItem().toString();
 				}
 			});
 
 			// Preenche o painel principal
-			painelEscolhaAlg.add(textoAlg);
-			painelEscolhaAlg.add(caixaEscolha);
+			painelEscolhaAlg.add(labelEscolhaAlg);
+			painelEscolhaAlg.add(caixaEscolhaAlg);
 			//--------------------Escolha do Algoritmo-------------------//
 
 
@@ -252,13 +250,13 @@ public class CriarEnvelope {
 		int tipoRetorno = Character.getNumericValue(result.charAt(0));
 		switch (tipoRetorno)
 		{
-			case 0:
+			case 0:	// Operacao sucedida
 			{
 				labelResult.setForeground(Color.GREEN);
 				break;
 			}
 
-			case 1:
+			case 1:	// Operacao falhou
 			{
 				labelResult.setForeground(Color.RED);
 				break;
