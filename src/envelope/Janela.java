@@ -1,9 +1,11 @@
 package envelope;
 
-import telas.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+
+import abaCriar.*;
+
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -43,6 +45,7 @@ public class Janela {
 				//------------------Painel Abrir Envelope------------------//
 				//painelAbreEnv = AbrirEnvelope.criarPainel();
 				//------------------Painel Abrir Envelope------------------//
+
 
 				// Adiciona os paineis de funcionalidades ao painel principal
 				painelOpcoes.addTab("Criar envelope", painelCriaEnv);

@@ -1,4 +1,4 @@
-package telas;
+package abaCriar;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -17,14 +17,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 public class CriarEnvelope {
+	static JPanel painelCriaEnv, painelResultados;
 	static JButton botaoArq1, botaoArq2;
 	static JTextArea ceNomeArqEntr1, ceNomeArqEntr2, ceNomeArqSaida1, ceNomeArqSaida2;
 	private static String texto, chaveRSA, algoritmo;
 
 
 	public static JPanel criarPainel() {
-		JPanel painelCriaEnv = new JPanel();
-
 
 		//------------------Criar Envelope------------------//
 		painelCriaEnv = new JPanel();
@@ -32,13 +31,15 @@ public class CriarEnvelope {
 		painelCriaEnv.setBackground(Color.GREEN);
 		painelCriaEnv.setSize(50, 50);
 		painelCriaEnv.setVisible(true);
+		painelResultados = new JPanel();
 
 
 			//---------------------Mensagem em claro---------------------//
 			JPanel painelArqTextoEmClaro = new JPanel();
 
 				// Label do arquivo de texto
-				JLabel labelArqTextoEmClaro = new JLabel("                             Arquivo de texto:");
+				JLabel labelArqTextoEmClaro = new JLabel("                             "
+						+ "Arquivo de texto:");
 
 				// Subpainel com a coleta do arquivo de texto
 				JPanel subpainelArqTextoEmClaro = new JPanel();
@@ -137,9 +138,9 @@ public class CriarEnvelope {
 
 			// Escolha de um algoritmo simetrico para o envelope
 			JLabel textoAlg = new JLabel("Algoritmo simétrico:");
-			String opcoesAlgSimetricos[] = {"AES", "DES", "RC4"};
+			String opcoesAlgSimetricos[] = {"-", "AES", "DES", "RC4"};
 
-			JComboBox caixaEscolha = new JComboBox(opcoesAlgSimetricos);
+			JComboBox<String> caixaEscolha = new JComboBox<>(opcoesAlgSimetricos);
 			caixaEscolha.setEditable(false);
 			caixaEscolha.addActionListener(new ActionListener() {
 				@Override
@@ -198,15 +199,14 @@ public class CriarEnvelope {
 			// Subpainel do botao de confirmacao
 			JPanel subpainelBotaoGerar = new JPanel();
 
-				// Botao de confirmacao (placeholder)
+				// Botao de confirmacao
 				JButton botaoGerarArqs = new JButton("Gerar");
-				botaoGerarArqs.addActionListener(e -> System.out.println(
-						"texto:\n\"\n" + texto + "\n\"\n\n" + 
-						"chave:\n\"\n" + chaveRSA + "\n\"\n\n" + 
-						"algoritmo:\n\"\n" + algoritmo + "\n\"\n\n" + 
-						"nomeArqChaveAss:\n\"\n" + nomeArqChaveAss.getText() + "\n\"\n\n" +
-						"nomeArqTextoCript:\n\"\n" + nomeArqTextoCript.getText() + "\n\"\n\n" +
-						"Gerou!"));
+				botaoGerarArqs.addActionListener(e -> {
+						String retorno = ListenerCriarEnv.clicouBotaoGerar(texto, chaveRSA, 
+								algoritmo, nomeArqChaveAss.getText(), 
+								nomeArqTextoCript.getText());
+						mostrarResultado(retorno);
+				});
 
 
 				// Preenche o subpainel com o componente
@@ -226,6 +226,7 @@ public class CriarEnvelope {
 			painelCriaEnv.add(painelArqChaveRSAdest);
 			painelCriaEnv.add(painelEscolhaAlg);
 			painelCriaEnv.add(painelGeracao);
+			painelCriaEnv.add(painelResultados);
 		//------------------Criar Envelope------------------//
 
 		return painelCriaEnv;
@@ -233,25 +234,68 @@ public class CriarEnvelope {
 
 
 
-public static String lerConteudo(File arquivo) {
-	String conteudo = "PLACEHOLDER";
+	public static void mostrarResultado(String result) {
 
-	String path = arquivo.getPath();
-	try {
-		BufferedReader leitor = new BufferedReader(new FileReader(path));
-		String linha = "", texto = "";
+		// Remove o Painel de Resultados da janela
+		painelCriaEnv.setVisible(false);
+		painelCriaEnv.remove(painelResultados);
 
-		while ((linha = leitor.readLine()) != null) {
-			texto += linha + "\n";
+		// Label com a mensagem de resultado da criacao dos arquivos
+		JLabel labelResult = new JLabel(result.substring(4));
+
+		// Tratamento da cor da mensagem com base no primeiro caractere
+		int tipoRetorno = Character.getNumericValue(result.charAt(0));
+		switch (tipoRetorno)
+		{
+			case 0:
+			{
+				labelResult.setForeground(Color.GREEN);
+				break;
+			}
+
+			case 1:
+			{
+				labelResult.setForeground(Color.RED);
+				break;
+			}
+
+			default:
+			{
+				labelResult.setForeground(Color.BLUE);
+				break;
+			}
 		}
 
-		conteudo = texto;
-		leitor.close();
-	}
-	catch (Exception e) {
-		e.printStackTrace();
+		// Recria o Painel portando a mensagem de resultado
+		painelResultados = new JPanel();
+		painelResultados.add(labelResult);
+
+		// Readiciona o Painel de Resultados na janela
+		painelCriaEnv.add(painelResultados);
+		painelCriaEnv.setVisible(true);
 	}
 
-	return conteudo;
-}
+
+
+	public static String lerConteudo(File arquivo) {
+		String conteudo = "PLACEHOLDER";
+
+		String path = arquivo.getPath();
+		try {
+			BufferedReader leitor = new BufferedReader(new FileReader(path));
+			String linha = "", texto = "";
+
+			while ((linha = leitor.readLine()) != null) {
+				texto += linha + "\n";
+			}
+
+			conteudo = texto;
+			leitor.close();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return conteudo;
+	}
 }

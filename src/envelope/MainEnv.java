@@ -1,6 +1,6 @@
 package envelope;
 
-public class Main {
+public class MainEnv {
 
 	public static void main(String[] args) {
 		Janela.criaJanela();
