@@ -31,7 +31,6 @@ public class CriarEnvelope {
 		painelCriaEnv.setBackground(Color.GREEN);
 		painelCriaEnv.setSize(50, 50);
 		painelCriaEnv.setVisible(true);
-		painelResultados = new JPanel();
 
 
 			//---------------------Mensagem em claro---------------------//
@@ -218,6 +217,12 @@ public class CriarEnvelope {
 			painelGeracao.add(subpainelArqTextoCript);
 			painelGeracao.add(subpainelBotaoGerar);
 			//-----------------------Gerar Arquivos----------------------//
+
+
+
+			//--------------------Mostrar Resultados---------------------//
+			painelResultados = new JPanel();
+			//--------------------Mostrar Resultados---------------------//
 
 
 
