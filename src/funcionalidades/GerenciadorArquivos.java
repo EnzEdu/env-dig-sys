@@ -12,8 +12,23 @@ public class GerenciadorArquivos {
 
 		// Caso o nome fornecido nao possua extensao, salva em .txt
 		// Verifica extensoes de 3 e 4 letras
-		if (nomeArq.lastIndexOf(".") != nomeArq.length()-4 &&
-			nomeArq.lastIndexOf(".") != nomeArq.length()-5)
+		boolean naoTemExt = true;
+		if (nomeArq.lastIndexOf(".") != -1)
+		{
+			// Olha se o ultimo ponto + ext caracteres representam o final do nome
+			// (extensao)
+			// (nao exatamente confere se eh uma extensao ou nao)
+			for (int ext = 3; ext <= 4; ext++)
+			{
+				if (nomeArq.lastIndexOf(".")+(ext+1) == nomeArq.length())
+				{
+					naoTemExt = false;
+					break;
+				}
+			}
+		}
+
+		if (naoTemExt == true)
 		{
 			nomeArq += ".txt";
 		}
@@ -41,10 +56,12 @@ public class GerenciadorArquivos {
 			int copia = 1;
 			while (copia > 0)
 			{
+				// Adiciona um numero no nome do arquivo
 				String novoNomeArq = nomeArq.substring(0, nomeArq.lastIndexOf(".")) +
 									 String.valueOf(copia) +
 									 nomeArq.substring(nomeArq.lastIndexOf("."));
 
+				// Cria o arquivo, caso n exista um arquivo com o novo nome
 				arq = new File(novoNomeArq);
 				if (arq.exists() == false)
 				{
@@ -59,14 +76,17 @@ public class GerenciadorArquivos {
 					break;
 				}
 
+				// Aumenta o contador
 				copia++;
 			}
 		}
 	}
-	
+
+
 	public static String lerArq(File arquivo) {
 		String conteudo = "PLACEHOLDER";
 
+		// Faz a leitura linha por linha do arquivo e salva em conteudo
 		String path = arquivo.getPath();
 		try {
 			BufferedReader leitor = new BufferedReader(new FileReader(path));
