@@ -25,7 +25,7 @@ public class ListenerGerarChv {
 		 * resultChaves[1] = chave privada
 		*/
 		String[] resultChaves = {"", ""};
-		//resultChaves = AlgoritmoRSA();
+		resultChaves = AlgoritmoRSA.gerarChaves();
 
 
 		// Ordena a escrita dos arquivos resultantes
