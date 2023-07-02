@@ -1,12 +1,9 @@
 package abaCriar;
 
+import funcionalidades.*;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -26,7 +23,7 @@ public class CriarEnvelope {
 		//------------------Criar Envelope------------------//
 		painelCriaEnv = new JPanel();
 		painelCriaEnv.setLayout(new BoxLayout(painelCriaEnv, BoxLayout.PAGE_AXIS));
-		painelCriaEnv.setBackground(Color.GREEN);
+		painelCriaEnv.setBackground(Color.WHITE);
 		painelCriaEnv.setSize(50, 50);
 		painelCriaEnv.setVisible(true);
 
@@ -61,7 +58,7 @@ public class CriarEnvelope {
 
 							if (i == JFileChooser.APPROVE_OPTION)
 							{
-								texto = lerConteudo(fc.getSelectedFile());
+								texto = GerenciadorArquivos.lerArq(fc.getSelectedFile());
 
 								String path = fc.getSelectedFile().getPath();
 								nomeArqTextoEmClaro.setText(path.substring(path.lastIndexOf(System.getProperty("file.separator")) + 1, path.length()));
@@ -110,7 +107,7 @@ public class CriarEnvelope {
 
 							if (i == JFileChooser.APPROVE_OPTION)
 							{
-								chaveRSA = lerConteudo(fc.getSelectedFile());
+								chaveRSA = GerenciadorArquivos.lerArq(fc.getSelectedFile());
 
 								String path = fc.getSelectedFile().getPath();
 								nomeArqChaveRSAdest.setText(path.substring(path.lastIndexOf(System.getProperty("file.separator")) + 1, path.length()));
@@ -156,64 +153,64 @@ public class CriarEnvelope {
 			//-----------------------Gerar Arquivos----------------------//
 			JPanel painelGeracao = new JPanel();
 			painelGeracao.setLayout(new BoxLayout(painelGeracao, BoxLayout.PAGE_AXIS));
-			painelGeracao.setBorder(BorderFactory.createEmptyBorder(50, 10, 10, 10));
+			painelGeracao.setBorder(BorderFactory.createEmptyBorder(50, 10, 0, 10));
 
 
-			// Subpainel do arquivo de saida com a chave assinada
-			JPanel subpainelArqChaveAss = new JPanel();
+				// Subpainel do arquivo de saida com a chave assinada
+				JPanel subpainelArqChaveAss = new JPanel();
 
-				// Label do arquivo de chave assinada
-				JLabel labelArqChaveAss = new JLabel("Nome do Arquivo de Chave Assinada: ");
+					// Label do arquivo de chave assinada
+					JLabel labelArqChaveAss = new JLabel("Nome do Arquivo de Chave Assinada: ");
 
-				// Nome do arquivo
-				JTextArea nomeArqChaveAss = new JTextArea(0, 0);
-				nomeArqChaveAss.setBounds(120,0,200,20);
-				nomeArqChaveAss.setLineWrap(true);
-				nomeArqChaveAss.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+					// Nome do arquivo
+					JTextArea nomeArqChaveAss = new JTextArea(0, 0);
+					nomeArqChaveAss.setBounds(120,0,200,20);
+					nomeArqChaveAss.setLineWrap(true);
+					nomeArqChaveAss.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-				// Preenche o subpainel com os componentes
-				subpainelArqChaveAss.add(labelArqChaveAss);
-				subpainelArqChaveAss.add(nomeArqChaveAss);
-
-
-			// Subpainel do arquivo de saida com o texto criptografado
-			JPanel subpainelArqTextoCript = new JPanel();
-
-				// Label do arquivo de texto
-				JLabel labelArqTextoCript = new JLabel("         Nome do Arquivo Criptografado: ");
-
-				// Nome do arquivo
-				JTextArea nomeArqTextoCript = new JTextArea(0, 0);
-				nomeArqTextoCript.setBounds(120,0,200,20);
-				nomeArqTextoCript.setLineWrap(true);
-				nomeArqTextoCript.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
-				// Preenche o subpainel com os componentes
-				subpainelArqTextoCript.add(labelArqTextoCript);
-				subpainelArqTextoCript.add(nomeArqTextoCript);
+					// Preenche o subpainel com os componentes
+					subpainelArqChaveAss.add(labelArqChaveAss);
+					subpainelArqChaveAss.add(nomeArqChaveAss);
 
 
-			// Subpainel do botao de confirmacao
-			JPanel subpainelBotaoGerar = new JPanel();
+				// Subpainel do arquivo de saida com o texto criptografado
+				JPanel subpainelArqTextoCript = new JPanel();
 
-				// Botao de confirmacao
-				JButton botaoGerarArqs = new JButton("Gerar");
-				botaoGerarArqs.addActionListener(e -> {
+					// Label do arquivo de texto
+					JLabel labelArqTextoCript = new JLabel("         Nome do Arquivo Criptografado: ");
+
+					// Nome do arquivo
+					JTextArea nomeArqTextoCript = new JTextArea(0, 0);
+					nomeArqTextoCript.setBounds(120,0,200,20);
+					nomeArqTextoCript.setLineWrap(true);
+					nomeArqTextoCript.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+					// Preenche o subpainel com os componentes
+					subpainelArqTextoCript.add(labelArqTextoCript);
+					subpainelArqTextoCript.add(nomeArqTextoCript);
+
+
+				// Subpainel do botao de confirmacao
+				JPanel subpainelBotaoGerar = new JPanel();
+
+					// Botao de confirmacao
+					JButton botaoGerarArqs = new JButton("Gerar");
+					botaoGerarArqs.addActionListener(e -> {
 						String retorno = ListenerCriarEnv.clicouBotaoGerar(texto, chaveRSA, 
 								algoritmo, nomeArqChaveAss.getText(), 
 								nomeArqTextoCript.getText());
 						mostrarResultado(retorno);
-				});
+					});
 
 
-				// Preenche o subpainel com o componente
-				subpainelBotaoGerar.add(botaoGerarArqs);
+					// Preenche o subpainel com o componente
+					subpainelBotaoGerar.add(botaoGerarArqs);
 
 
-			// Preenche o painel principal
-			painelGeracao.add(subpainelArqChaveAss);
-			painelGeracao.add(subpainelArqTextoCript);
-			painelGeracao.add(subpainelBotaoGerar);
+				// Preenche o painel principal
+				painelGeracao.add(subpainelArqChaveAss);
+				painelGeracao.add(subpainelArqTextoCript);
+				painelGeracao.add(subpainelBotaoGerar);
 			//-----------------------Gerar Arquivos----------------------//
 
 
@@ -278,27 +275,4 @@ public class CriarEnvelope {
 		painelCriaEnv.setVisible(true);
 	}
 
-
-
-	public static String lerConteudo(File arquivo) {
-		String conteudo = "PLACEHOLDER";
-
-		String path = arquivo.getPath();
-		try {
-			BufferedReader leitor = new BufferedReader(new FileReader(path));
-			String linha = "", texto = "";
-
-			while ((linha = leitor.readLine()) != null) {
-				texto += linha + "\n";
-			}
-
-			conteudo = texto;
-			leitor.close();
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return conteudo;
-	}
 }

@@ -84,8 +84,8 @@ public class ListenerCriarEnv {
 
 
 		// Ordena a escrita dos arquivos resultantes
-		CriarArquivo.criar(nomeArqChaveAss  , resultEnvelope[0]);
-		CriarArquivo.criar(nomeArqTextoCript, resultEnvelope[1]);
+		GerenciadorArquivos.criarArq(nomeArqChaveAss  , resultEnvelope[0]);
+		GerenciadorArquivos.criarArq(nomeArqTextoCript, resultEnvelope[1]);
 
 
 		/* ---DEBUG---

@@ -1,12 +1,14 @@
 package funcionalidades;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class CriarArquivo {
+public class GerenciadorArquivos {
 
-	public static void criar(String nomeArq, String conteudo) {
+	public static void criarArq(String nomeArq, String conteudo) {
 
 		// Caso o nome fornecido nao possua extensao, salva em .txt
 		// Verifica extensoes de 3 e 4 letras
@@ -60,5 +62,27 @@ public class CriarArquivo {
 				copia++;
 			}
 		}
+	}
+	
+	public static String lerArq(File arquivo) {
+		String conteudo = "PLACEHOLDER";
+
+		String path = arquivo.getPath();
+		try {
+			BufferedReader leitor = new BufferedReader(new FileReader(path));
+			String linha = "", texto = "";
+
+			while ((linha = leitor.readLine()) != null) {
+				texto += linha + "\n";
+			}
+
+			conteudo = texto;
+			leitor.close();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return conteudo;
 	}
 }

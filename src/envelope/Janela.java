@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import abaCriar.CriarEnvelope;
+import abaGerar.GerarChaves;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -13,7 +14,7 @@ import java.awt.GridBagLayout;
 public class Janela {
 	static JFrame janela;
 	static JTabbedPane painelOpcoes;
-	static JPanel painelCriaEnv;
+	static JPanel painelCriaEnv, painelGeraChv;
 
 	public static void criaJanela() {
 		janela = new JFrame();
@@ -39,7 +40,7 @@ public class Janela {
 
 
 				//-------------------Painel Gerar Chaves-------------------//
-				//painelGeraChv = GerarChaves.criarPainel();
+				painelGeraChv = GerarChaves.criarPainel();
 				//-------------------Painel Gerar Chaves-------------------//
 
 
@@ -53,7 +54,7 @@ public class Janela {
 
 
 				// Adiciona os paineis de funcionalidades ao painel principal
-				//painelOpcoes.addTab("Gerar chaves RSA", painelGeraChv);
+				painelOpcoes.addTab("Gerar chaves", painelGeraChv);
 				painelOpcoes.addTab("Criar envelope", painelCriaEnv);
 				//painelOpcoes.addTab("Abrir envelope", painelAbreEnv);
 
