@@ -6,12 +6,38 @@ title MainEnv
 
 /' Componentes e pacotes '/
 package "JFrame Janela" {
+
   package "JTabbedPane painelOpcoes" {
     
     package "JPanel painelGeraChv" {
+    
+      package "JPanel painelArqChavePubl" {
+        [JLabel labelArqChavePubl]
+        
+        package "subpainelArqChavePubl" {
+          [JTextArea nomeArqChavePubl]
+        }
+      }
+      
+      package "JPanel painelArqChavePriv" {
+        [JLabel labelArqChavePriv]
+        
+        package "subpainelArqChavePriv" {
+          [JTextArea nomeArqChavePriv]
+        }
+      }
+      
+      package "JPanel painelBotaoGeraArqsRSA" {
+        [JButton botaoGeraArqsRSA]
+      }
+      
+      package "JPanel painelResultados2" {
+        [JLabel labelResult2]
+      }
     }
     
     package "JPanel painelCriaEnv" {
+
       package "JPanel painelArqTextoEmClaro" {
         [JLabel labelArqTextoEmClaro]
         
@@ -51,33 +77,38 @@ package "JFrame Janela" {
         }
       }
       
-      package "JPanel painelResultados" {
-        [JLabel labelResult]
+      package "JPanel painelResultados1" {
+        [JLabel labelResult1]
       }
     }
     
     package "JPanel painelAbreEnv" {
     }
   }
-}
-
-
-package "Funcionalidades" {
-  [CriarArquivo]
+  
+  package "Funcionalidades" {
+    [CriarArquivo]
+  }
 }
 
 
 
 
 /' Relações '/
+
+/' abaGerar '/
+[JTextArea nomeArqChavePubl] --> [JButton botaoGeraArqsRSA]
+[JTextArea nomeArqChavePriv] --> [JButton botaoGeraArqsRSA]
+[JButton botaoGeraArqsRSA] --> [CriarArquivo] /' chavePublica e chavePrivada '/
+[JButton botaoGeraArqsRSA] --> [JLabel labelResult2]
+
+/' abaCriar '/
 [JButton botaoArqTextoEmClaro] --> [JButton botaoGerarArqs]
 [JButton botaoArqChaveRSAdest] --> [JButton botaoGerarArqs]
 [JComboBox caixaEscolhaAlg] --> [JButton botaoGerarArqs]
 [JTextArea nomeArqChaveAss] --> [JButton botaoGerarArqs]
 [JTextArea nomeArqTextoCript] --> [JButton botaoGerarArqs]
-
-[JButton botaoGerarArqs] --> [CriarArquivo] : chaveAssinada
-[JButton botaoGerarArqs] --> [CriarArquivo] : textoCriptografado
-[CriarArquivo] --> [JLabel labelResult]
+[JButton botaoGerarArqs] --> [CriarArquivo] /' chaveAssinada e textoCriptografado '/
+[JButton botaoGerarArqs] --> [JLabel labelResult1]
 
 @enduml

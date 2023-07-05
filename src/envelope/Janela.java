@@ -4,8 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-import abaCriar.CriarEnvelope;
 import abaGerar.GerarChaves;
+import abaCriar.CriarEnvelope;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -14,7 +14,7 @@ import java.awt.GridBagLayout;
 public class Janela {
 	static JFrame janela;
 	static JTabbedPane painelOpcoes;
-	static JPanel painelCriaEnv, painelGeraChv;
+	static JPanel painelGeraChv, painelCriaEnv, painelAbreEnv;
 
 	public static void criaJanela() {
 		janela = new JFrame();
@@ -35,7 +35,7 @@ public class Janela {
 
 			//-------------------Painel de Opcoes---------------//
 			painelOpcoes = new JTabbedPane();
-			painelOpcoes.setBackground(Color.RED);
+			painelOpcoes.setBackground(Color.GREEN);
 			//-------------------Painel de Opcoes---------------//
 
 
@@ -43,20 +43,19 @@ public class Janela {
 				painelGeraChv = GerarChaves.criarPainel();
 				//-------------------Painel Gerar Chaves-------------------//
 
-
 				//------------------Painel Criar Envelope------------------//
 				painelCriaEnv = CriarEnvelope.criarPainel();
 				//------------------Painel Criar Envelope------------------//
 
 				//------------------Painel Abrir Envelope------------------//
-				//painelAbreEnv = AbrirEnvelope.criarPainel();
+//				painelAbreEnv = AbrirEnvelope.criarPainel();
 				//------------------Painel Abrir Envelope------------------//
 
 
 				// Adiciona os paineis de funcionalidades ao painel principal
 				painelOpcoes.addTab("Gerar chaves", painelGeraChv);
 				painelOpcoes.addTab("Criar envelope", painelCriaEnv);
-				//painelOpcoes.addTab("Abrir envelope", painelAbreEnv);
+//				painelOpcoes.addTab("Abrir envelope", painelAbreEnv);
 
 
 			// Adiciona o Painel de Opcoes no frame principal
