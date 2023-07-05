@@ -6,6 +6,7 @@ import javax.swing.JTabbedPane;
 
 import abaGerar.GerarChaves;
 import abaCriar.CriarEnvelope;
+import abaAbrir.AbrirEnvelope;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -48,14 +49,14 @@ public class Janela {
 				//------------------Painel Criar Envelope------------------//
 
 				//------------------Painel Abrir Envelope------------------//
-//				painelAbreEnv = AbrirEnvelope.criarPainel();
+				painelAbreEnv = AbrirEnvelope.criarPainel();
 				//------------------Painel Abrir Envelope------------------//
 
 
 				// Adiciona os paineis de funcionalidades ao painel principal
 				painelOpcoes.addTab("Gerar chaves", painelGeraChv);
 				painelOpcoes.addTab("Criar envelope", painelCriaEnv);
-//				painelOpcoes.addTab("Abrir envelope", painelAbreEnv);
+				painelOpcoes.addTab("Abrir envelope", painelAbreEnv);
 
 
 			// Adiciona o Painel de Opcoes no frame principal
