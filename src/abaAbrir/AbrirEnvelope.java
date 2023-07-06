@@ -17,7 +17,7 @@ import funcionalidades.GerenciadorArquivos;
 
 public class AbrirEnvelope {
 	static JPanel painelAbreEnv, painelResultados;
-	static String msgCript, chavePrivRSA, algoritmo;
+	static String msgCript, chaveCript, chavePrivRSA, algoritmo;
 
 
 	public static JPanel criarPainel() {
@@ -76,6 +76,55 @@ public class AbrirEnvelope {
 				painelArqCript.add(labelArqCript);
 				painelArqCript.add(subpainelArqCript);
 			//------------------Mensagem Criptografada------------------//
+
+
+
+			//--------------------Chave Criptografada--------------------//
+			JPanel painelChaveCript = new JPanel();
+
+				// Label da chave criptografada
+				JLabel labelChaveCript = new JLabel("                      Chave criptografada:");
+
+				// Subpainel com a coleta do arquivo
+				JPanel subpainelChaveCript = new JPanel();
+
+					// Area com o nome do arquivo
+					JTextArea nomeChaveCript = new JTextArea(0, 0);
+					nomeChaveCript.setBounds(120,0,200,20);
+					nomeChaveCript.setLineWrap(true);
+					nomeChaveCript.setEditable(false);
+					nomeChaveCript.setBackground(new Color(210, 210, 210));
+					nomeChaveCript.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+					// Escolha do arquivo com a mensagem
+					JButton botaoChaveCript = new JButton("Procurar...");
+					botaoChaveCript.setSize(120, 30);
+					botaoChaveCript.setVisible(true);
+					botaoChaveCript.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							JFileChooser fc = new JFileChooser();
+							int i = fc.showOpenDialog(subpainelChaveCript);
+
+							if (i == JFileChooser.APPROVE_OPTION)
+							{
+								chaveCript = GerenciadorArquivos.lerArq(fc.getSelectedFile());
+
+								String path = fc.getSelectedFile().getPath();
+								nomeChaveCript.setText(path.substring(path.lastIndexOf(System.getProperty("file.separator")) + 1, path.length()));
+							}
+						}
+					});
+
+					// Preenche o subpainel com os componentes
+					subpainelChaveCript.add(botaoChaveCript);
+					subpainelChaveCript.add(nomeChaveCript);
+
+
+				// Preenche o painel principal
+				painelChaveCript.add(labelChaveCript);
+				painelChaveCript.add(subpainelChaveCript);
+			//--------------------Chave Criptografada--------------------//
 
 
 
@@ -154,7 +203,7 @@ public class AbrirEnvelope {
 			//-----------------------Gerar Arquivo-----------------------//
 			JPanel painelGeraArqDecif = new JPanel();
 			painelGeraArqDecif.setLayout(new BoxLayout(painelGeraArqDecif, BoxLayout.PAGE_AXIS));
-			painelGeraArqDecif.setBorder(BorderFactory.createEmptyBorder(77, 10, 0, 10));
+			painelGeraArqDecif.setBorder(BorderFactory.createEmptyBorder(32, 10, 0, 10));
 
 				// Subpainel do arquivo de saida com a mensagem decifrada
 				JPanel subpainelArqDecif = new JPanel();
@@ -204,6 +253,7 @@ public class AbrirEnvelope {
 
 			// Adiciona os paineis no Painel de Criacao de Envelope
 			painelAbreEnv.add(painelArqCript);
+			painelAbreEnv.add(painelChaveCript);
 			painelAbreEnv.add(painelArqChavePrivDest);
 			painelAbreEnv.add(painelEscolhaAlg);
 			painelAbreEnv.add(painelGeraArqDecif);
