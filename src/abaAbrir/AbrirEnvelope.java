@@ -131,7 +131,7 @@ public class AbrirEnvelope {
 			JPanel painelArqChavePrivDest = new JPanel();
 
 				// Label do arquivo com a chave privada
-				JLabel labelArqChavePrivDest = new JLabel("Chave Privada RSA (Destinatário):");
+				JLabel labelArqChavePrivDest = new JLabel("Chave Privada RSA (Destinatario):");
 
 				// Subpainel com a coleta do arquivo
 				JPanel subpainelArqChavePrivDest = new JPanel();
@@ -180,7 +180,7 @@ public class AbrirEnvelope {
 			JPanel painelEscolhaAlg = new JPanel();
 
 				// Escolha de um algoritmo simetrico para o envelope
-				JLabel labelEscolhaAlg = new JLabel("Algoritmo simétrico:");
+				JLabel labelEscolhaAlg = new JLabel("Algoritmo simetrico:");
 				String opcoesAlgSimetricos[] = {"-", "AES", "DES", "RC4"};
 
 				JComboBox<String> caixaEscolhaAlg = new JComboBox<>(opcoesAlgSimetricos);

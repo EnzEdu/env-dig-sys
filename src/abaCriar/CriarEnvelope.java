@@ -83,7 +83,7 @@ public class CriarEnvelope {
 			JPanel painelArqChaveRSAdest = new JPanel();
 
 				// Label do arquivo com a chave publica
-				JLabel labelArqChaveRSAdest = new JLabel("Chave Pública RSA (Destinatário):");
+				JLabel labelArqChaveRSAdest = new JLabel("Chave Publica RSA (Destinatario):");
 
 				// Subpainel com a coleta do arquivo com a chave
 				JPanel subpainelArqChaveRSAdest = new JPanel();
@@ -124,7 +124,7 @@ public class CriarEnvelope {
 				// Preenche o painel principal
 				painelArqChaveRSAdest.add(labelArqChaveRSAdest);
 				painelArqChaveRSAdest.add(subpainelArqChaveRSAdest);
-			//-------------------------Chave RSA-------------------------//
+			//------------------Chave RSA Destinatario-------------------//
 
 
 
@@ -132,7 +132,7 @@ public class CriarEnvelope {
 			JPanel painelEscolhaAlg = new JPanel();
 
 			// Escolha de um algoritmo simetrico para o envelope
-			JLabel labelEscolhaAlg = new JLabel("Algoritmo simétrico:");
+			JLabel labelEscolhaAlg = new JLabel("Algoritmo simetrico:");
 			String opcoesAlgSimetricos[] = {"-", "AES", "DES", "RC4"};
 
 			JComboBox<String> caixaEscolhaAlg = new JComboBox<>(opcoesAlgSimetricos);

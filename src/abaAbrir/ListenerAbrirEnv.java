@@ -11,13 +11,13 @@ public class ListenerAbrirEnv {
 		String strMsgCript = new String(msgCript);
 		String strChavePrivRSA = new String(chavePrivRSA);
 		String strChaveCript = new String(chaveCript);
-		
+
 		// Verifica se o arquivo de mensagem criptografada esta vazio
 		if (strMsgCript == null || strMsgCript.isBlank() == true)
 		{
 			return "1 - Arquivo de texto vazio.";
 		}
-		
+
 		// Verifica se o arquivo da chave privada RSA esta vazio
 		else
 		if (strChavePrivRSA == null || strChavePrivRSA.isBlank() == true)
@@ -84,7 +84,7 @@ public class ListenerAbrirEnv {
 				textoEmClaro = AlgoritmoRC4.decifrar(msgCript  , chaveSimet);
 				break;
 			}
-			
+
 			default:
 			{
 				break;
