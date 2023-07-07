@@ -4,26 +4,30 @@ import funcionalidades.*;
 
 public class ListenerCriarEnv {
 
-	public static String clicouBotaoGerar(String texto, String chaveRSA,
+	public static String clicouBotaoGerar(byte[] texto, byte[] chavePublRSA,
 			String algoritmo, String nomeArqChaveAss, String nomeArqTextoCript) {
 
+		// Instancia as versoes em String para verificacoes
+		String strTexto = new String(texto);
+		String strChavePublRSA = new String(chavePublRSA);
+
 		// Verifica se o arquivo de texto esta vazio
-		if (texto == null || texto.isBlank() == true)
+		if (strTexto == null || strTexto.isBlank() == true)
 		{
 			return "1 - Arquivo de texto vazio.";
 		}
 
 		// Verifica se o arquivo da chave publica RSA esta vazio
 		else
-		if (chaveRSA == null || chaveRSA.isBlank() == true)
+		if (strChavePublRSA == null || strChavePublRSA.isBlank() == true)
 		{
 			return "1 - Arquivo de chave RSA vazio.";
 		}
 
 		// Verifica se o arquivo da chave publica RSA utiliza o padrão OpenSSL
 		else
-		if (chaveRSA.trim().startsWith("-----BEGIN PUBLIC KEY-----") == false ||
-			chaveRSA.trim().endsWith("-----END PUBLIC KEY-----") == false)
+		if (strChavePublRSA.trim().startsWith("-----BEGIN PUBLIC KEY-----") == false ||
+			strChavePublRSA.trim().endsWith("-----END PUBLIC KEY-----") == false)
 		{
 			return "1 - Arquivo de chave RSA fora do padrão OpenSSL.";
 		}
@@ -50,29 +54,37 @@ public class ListenerCriarEnv {
 		}
 
 
-		/* Recebe os resultados do Envelope com base no algoritmo escolhido
-		 * resultEnvelope[0] = chave assinada
-		 * resultEnvelope[1] = texto criptografado
+		/* Recebe os resultados da criptografia com base no algoritmo escolhido
+		 * dadosAlgoritmo[0] = texto criptografado
+		 * dadosAlgoritmo[1] = chave simetrica em claro
+		 * chaveSimetCript   = chave simetrica criptografada
 		*/
-		String[] resultEnvelope = {"", ""};
+		byte[][] dadosAlgoritmo = new byte[1][2];
+		byte[] chaveSimetCript = new byte[2];
 		switch (algoritmo)
 		{
 			/*
 			case "AES":
 			{
-				resultEnvelope = AlgoritmoAES(texto, chaveRSA);
+				// Realiza a criptografia simetrica, depois o envelope
+				dadosAlgoritmo  = AlgoritmoAES.cifrar(texto);
+				chaveSimetCript = AlgoritmoRSA.cifrar(dadosAlgoritmo[1], chavePublRSA);
 				break;
 			}
 			*/ /*
 			case "DES":
 			{
-				resultEnvelope = AlgoritmoDES(texto, chaveRSA);
+				// Realiza a criptografia simetrica, depois o envelope
+				dadosAlgoritmo  = AlgoritmoDES.cifrar(texto);
+				chaveSimetCript = AlgoritmoRSA.cifrar(dadosAlgoritmo[1], chavePublRSA);
 				break;
 			}
 			*/ /*
 			case "RC4":
 			{
-				resultEnvelope = AlgoritmoRC4(texto, chaveRSA);
+				// Realiza a criptografia simetrica, depois o envelope
+				dadosAlgoritmo  = AlgoritmoRC4.cifrar(texto);
+				chaveSimetCript = AlgoritmoRSA.cifrar(dadosAlgoritmo[1], chavePublRSA);
 				break;
 			}
 			*/
@@ -84,13 +96,13 @@ public class ListenerCriarEnv {
 
 
 		// Ordena a escrita dos arquivos resultantes
-		GerenciadorArquivos.criarArq(nomeArqChaveAss  , resultEnvelope[0]);
-		GerenciadorArquivos.criarArq(nomeArqTextoCript, resultEnvelope[1]);
+		GerenciadorArquivos.criarArq(nomeArqTextoCript, dadosAlgoritmo[0]);
+		GerenciadorArquivos.criarArq(nomeArqChaveAss, chaveSimetCript);
 
 
 		/* ---DEBUG---
-		System.out.println("texto:\n\"\n" + texto + "\n\"\n\n" +
-				"chave:\n\"\n" + chaveRSA + "\n\"\n\n" +
+		System.out.println("texto:\n\"\n" + new String(texto) + "\n\"\n\n" +
+				"chave:\n\"\n" + new String(chavePublRSA) + "\n\"\n\n" +
 				"algoritmo:\n\"\n" + algoritmo + "\n\"\n\n" +
 				"nomeArqChaveAss:\n\"\n" + nomeArqChaveAss + "\n\"\n\n" +
 				"nomeArqTextoCript:\n\"\n" + nomeArqTextoCript + "\n\"\n\n" +

@@ -4,28 +4,40 @@ import funcionalidades.*;
 
 public class ListenerAbrirEnv {
 
-	public static String clicouBotaoGerar(String msgCript, String chavePrivRSA,
-			String algoritmo, String nomeArqMsgDecif) {
+	public static String clicouBotaoGerar(byte[] msgCript, byte[] chaveCript,
+			byte[] chavePrivRSA, String algoritmo, String nomeArqMsgDecif) {
 
+		// Instancia as versoes em String para verificacoes
+		String strMsgCript = new String(msgCript);
+		String strChavePrivRSA = new String(chavePrivRSA);
+		String strChaveCript = new String(chaveCript);
+		
 		// Verifica se o arquivo de mensagem criptografada esta vazio
-		if (msgCript == null || msgCript.isBlank() == true)
+		if (strMsgCript == null || strMsgCript.isBlank() == true)
 		{
 			return "1 - Arquivo de texto vazio.";
 		}
-
+		
 		// Verifica se o arquivo da chave privada RSA esta vazio
 		else
-		if (chavePrivRSA == null || chavePrivRSA.isBlank() == true)
+		if (strChavePrivRSA == null || strChavePrivRSA.isBlank() == true)
 		{
 			return "1 - Arquivo de chave RSA vazio.";
 		}
 
 		// Verifica se o arquivo da chave privada RSA utiliza o padrão OpenSSL
 		else
-		if (chavePrivRSA.trim().startsWith("-----BEGIN PRIVATE KEY-----") == false ||
-			chavePrivRSA.trim().endsWith("-----END PRIVATE KEY-----") == false)
+		if (strChavePrivRSA.trim().startsWith("-----BEGIN PRIVATE KEY-----") == false ||
+			strChavePrivRSA.trim().endsWith("-----END PRIVATE KEY-----") == false)
 		{
 			return "1 - Arquivo de chave RSA fora do padrão OpenSSL.";
+		}
+
+		// Verifica se o arquivo de chave criptografada esta vazio
+		else
+		if (strChaveCript == null || strChaveCript.isBlank() == true)
+		{
+			return "1 - Arquivo de chave simétrica criptografada vazio.";
 		}
 
 		// Verifica se foi escolhido um algoritmo
@@ -44,25 +56,32 @@ public class ListenerAbrirEnv {
 
 
 		// Recebe o texto decifrado com base no algoritmo escolhido
-		String resultEnvelope = "";
+		byte[] chaveSimet = new byte[2];
+		byte[] textoEmClaro = new byte[2];
 		switch (algoritmo)
 		{
 			/*
 			case "AES":
 			{
-				resultEnvelope = AlgoritmoAES.decifrar(texto, chaveRSA);
+				// Decifra o envelope, depois a criptografia simetrica
+				chaveSimet   = AlgoritmoRSA.decifrar(chaveCript, chavePrivRSA);
+				textoEmClaro = AlgoritmoAES.decifrar(msgCript  , chaveSimet);
 				break;
 			}
 			*/ /*
 			case "DES":
 			{
-				resultEnvelope = AlgoritmoDES.decifrar(texto, chaveRSA);
+				// Decifra o envelope, depois a criptografia simetrica
+				chaveSimet   = AlgoritmoRSA.decifrar(chaveCript, chavePrivRSA);
+				textoEmClaro = AlgoritmoDES.decifrar(msgCript  , chaveSimet);
 				break;
 			}
 			*/ /*
 			case "RC4":
 			{
-				resultEnvelope = AlgoritmoRC4.decifrar(texto, chaveRSA);
+				// Decifra o envelope, depois a criptografia simetrica
+				chaveSimet   = AlgoritmoRSA.decifrar(chaveCript, chavePrivRSA);
+				textoEmClaro = AlgoritmoRC4.decifrar(msgCript  , chaveSimet);
 				break;
 			}
 			*/
@@ -74,12 +93,12 @@ public class ListenerAbrirEnv {
 
 
 		// Ordena a escrita dos arquivos resultantes
-		GerenciadorArquivos.criarArq(nomeArqMsgDecif, resultEnvelope);
+		GerenciadorArquivos.criarArq(nomeArqMsgDecif, textoEmClaro);
 
 
 		/* ---DEBUG---
-		System.out.println("msgCript:\n\"\n" + msgCript + "\n\"\n\n" +
-				"chavePrivRSA:\n\"\n" + chavePrivRSA + "\n\"\n\n" +
+		System.out.println("msgCript:\n\"\n" + new String(msgCript) + "\n\"\n\n" +
+				"chavePrivRSA:\n\"\n" + new String(chavePrivRSA) + "\n\"\n\n" +
 				"algoritmo:\n\"\n" + algoritmo + "\n\"\n\n" +
 				"Gerou!"); */
 		return "0 - Arquivo gerado com sucesso!";

@@ -1,14 +1,13 @@
 package funcionalidades;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class GerenciadorArquivos {
 
-	public static void criarArq(String nomeArq, String conteudo) {
+	public static void criarArq(String nomeArq, byte[] conteudo) {
 
 		// Caso o nome fornecido nao possua extensao, salva em .txt
 		// Verifica extensoes de 3 e 4 letras
@@ -41,9 +40,10 @@ public class GerenciadorArquivos {
 		if (arq.exists() == false)
 		{
 			try {
-				FileWriter arquivo = new FileWriter(nomeArq);
-				arquivo.write(conteudo);
-				arquivo.close();
+//				File arquivo = new File(nomeArq);
+				FileOutputStream escritor = new FileOutputStream(arq);
+				escritor.write(conteudo);
+				escritor.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -66,9 +66,9 @@ public class GerenciadorArquivos {
 				if (arq.exists() == false)
 				{
 					try {
-						FileWriter arquivo = new FileWriter(novoNomeArq);
-						arquivo.write(conteudo);
-						arquivo.close();
+						FileOutputStream escritor = new FileOutputStream(arq);
+						escritor.write(conteudo);
+						escritor.close();
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -83,23 +83,15 @@ public class GerenciadorArquivos {
 	}
 
 
-	public static String lerArq(File arquivo) {
-		String conteudo = "PLACEHOLDER";
+	public static byte[] lerArq(File arquivo) {
+		byte[] conteudo = new byte[(int) arquivo.length()];
 
 		// Faz a leitura linha por linha do arquivo e salva em conteudo
-		String path = arquivo.getPath();
 		try {
-			BufferedReader leitor = new BufferedReader(new FileReader(path));
-			String linha = "", texto = "";
-
-			while ((linha = leitor.readLine()) != null) {
-				texto += linha + "\n";
-			}
-
-			conteudo = texto;
+			FileInputStream leitor = new FileInputStream(arquivo);
+			leitor.read(conteudo);
 			leitor.close();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 

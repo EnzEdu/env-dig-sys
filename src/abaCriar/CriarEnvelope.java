@@ -1,6 +1,6 @@
 package abaCriar;
 
-import funcionalidades.*;
+import funcionalidades.GerenciadorArquivos;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,7 +15,8 @@ import javax.swing.JTextArea;
 
 public class CriarEnvelope {
 	static JPanel painelCriaEnv, painelResultados;
-	private static String texto, chaveRSA, algoritmo;
+	private static byte[] texto, chaveRSA;
+	private static String algoritmo;
 
 
 	public static JPanel criarPainel() {

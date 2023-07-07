@@ -10,8 +10,6 @@ import javax.swing.JTextArea;
 
 public class GerarChaves {
 	static JPanel painelGeraChv, painelResultados;
-	static String chavePublRSA, chavePrivRSA;
-
 
 	public static JPanel criarPainel() {
 
@@ -157,7 +155,4 @@ public class GerarChaves {
 		painelGeraChv.add(painelResultados);
 		painelGeraChv.setVisible(true);
 	}
-
-
-
 }

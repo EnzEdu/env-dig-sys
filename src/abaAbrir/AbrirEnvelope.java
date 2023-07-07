@@ -1,5 +1,6 @@
 package abaAbrir;
 
+import funcionalidades.GerenciadorArquivos;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,12 +13,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import abaGerar.ListenerGerarChv;
-import funcionalidades.GerenciadorArquivos;
-
 public class AbrirEnvelope {
 	static JPanel painelAbreEnv, painelResultados;
-	static String msgCript, chaveCript, chavePrivRSA, algoritmo;
+	private static byte[] msgCript, chaveCript, chavePrivRSA;
+	private static String algoritmo;
 
 
 	public static JPanel criarPainel() {
@@ -229,7 +228,7 @@ public class AbrirEnvelope {
 					JButton botaoGeraArqDecif = new JButton("Gerar");
 					botaoGeraArqDecif.addActionListener(e -> {
 							String retorno = ListenerAbrirEnv.clicouBotaoGerar
-									(msgCript, chavePrivRSA, algoritmo,
+									(msgCript, chaveCript, chavePrivRSA, algoritmo,
 									 nomeArqDecif.getText());
 							mostrarResultado(retorno);
 					});

@@ -29,8 +29,8 @@ public class ListenerGerarChv {
 
 
 		// Ordena a escrita dos arquivos resultantes
-		GerenciadorArquivos.criarArq(nomeChavePubl, resultChaves[0]);
-		GerenciadorArquivos.criarArq(nomeChavePriv, resultChaves[1]);
+		GerenciadorArquivos.criarArq(nomeChavePubl, resultChaves[0].getBytes());
+		GerenciadorArquivos.criarArq(nomeChavePriv, resultChaves[1].getBytes());
 
 
 		/* ---DEBUG---
