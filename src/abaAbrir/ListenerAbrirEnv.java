@@ -76,7 +76,7 @@ public class ListenerAbrirEnv {
 				textoEmClaro = AlgoritmoDES.decifrar(msgCript  , chaveSimet);
 				break;
 			}
-			*/ /*
+			*/
 			case "RC4":
 			{
 				// Decifra o envelope, depois a criptografia simetrica
@@ -84,7 +84,7 @@ public class ListenerAbrirEnv {
 				textoEmClaro = AlgoritmoRC4.decifrar(msgCript  , chaveSimet);
 				break;
 			}
-			*/
+			
 			default:
 			{
 				break;
