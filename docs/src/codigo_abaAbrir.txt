@@ -1,0 +1,72 @@
+@startuml
+!theme mars
+title MainEnv
+
+/' abaAbrir '/
+
+/' Componentes e pacotes '/
+package "JFrame Janela" {
+
+  package "JTabbedPane painelOpcoes" {
+    
+    package "JPanel painelAbreEnv" {
+    
+      package "JPanel painelArqCript" {
+        package "JPanel subpainelArqCript" {
+          [JButton botaoArqCript]
+          [JTextArea nomeArqCript]
+        }
+      }
+      
+      package "JPanel painelChaveCript" {
+        package "JPanel subpainelChaveCript" {
+          [JButton botaoChaveCript]
+          [JTextArea nomeChaveCript]
+        }
+      }
+      
+      package "JPanel painelArqChavePrivDest" {
+        package "JPanel subpainelArqChavePrivDest" {
+          [JButton botaoArqChavePrivDest]
+          [JTextArea nomeArqChavePrivDest]
+        }
+      }
+      
+      package "JPanel painelEscolhaAlg" {
+        [JComboBox caixaEscolhaAlg]
+      }
+      
+      package "JPanel painelGeraArqDecif" {
+        package "JPanel subpainelArqGeraArqDecif" {
+          [JTextArea nomeArqDecif]
+        }
+
+        package "JPanel subpainelBotaoGeraArqDecif" {
+          [JButton botaoGeraArqDecif]
+        }
+      }
+      
+      package "JPanel painelResultados" {
+        [JLabel mensagemRetorno]
+      }
+    }
+  }
+  
+  package "Funcionalidades" {
+    [CriarArquivo]
+  }
+}
+
+
+
+
+/' Relações '/
+[JButton botaoArqCript] --> [JButton botaoGeraArqDecif]
+[JButton botaoChaveCript] --> [JButton botaoGeraArqDecif]
+[JButton botaoArqChavePrivDest] --> [JButton botaoGeraArqDecif]
+[JComboBox caixaEscolhaAlg] --> [JButton botaoGeraArqDecif]
+[JTextArea nomeArqDecif] --> [JButton botaoGeraArqDecif]
+[JButton botaoGeraArqDecif] --> [CriarArquivo] /' textoDecifrado '/
+[JButton botaoGeraArqDecif] --> [JLabel mensagemRetorno]
+
+@enduml

@@ -1,0 +1,50 @@
+@startuml
+!theme mars
+title MainEnv
+
+/' abaGerar '/
+
+/' Componentes e pacotes '/
+package "JFrame Janela" {
+
+  package "JTabbedPane painelOpcoes" {
+    
+    package "JPanel painelGeraChv" {
+    
+      package "JPanel painelArqChavePubl" {
+        package "JPanel subpainelArqChavePubl" {
+          [JTextArea nomeArqChavePubl]
+        }
+      }
+      
+      package "JPanel painelArqChavePriv" {
+        package "JPanel subpainelArqChavePriv" {
+          [JTextArea nomeArqChavePriv]
+        }
+      }
+      
+      package "JPanel painelGeraArqsRSA" {
+        [JButton botaoGeraArqsRSA]
+      }
+      
+      package "JPanel painelResultados" {
+        [JLabel mensagemRetorno]
+      }
+    }
+  }
+  
+  package "Funcionalidades" {
+    [CriarArquivo]
+  }
+}
+
+
+
+
+/' Relações '/
+[JTextArea nomeArqChavePubl] --> [JButton botaoGeraArqsRSA]
+[JTextArea nomeArqChavePriv] --> [JButton botaoGeraArqsRSA]
+[JButton botaoGeraArqsRSA] --> [CriarArquivo] /' chavePublicaRSA e chavePrivadaRSA '/
+[JButton botaoGeraArqsRSA] --> [JLabel mensagemRetorno]
+
+@enduml
