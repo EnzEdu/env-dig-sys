@@ -63,7 +63,7 @@ public class ListenerCriarEnv {
 		byte[] chaveSimetCript = new byte[2];
 		switch (algoritmo)
 		{
-			/*
+			
 			case "AES":
 			{
 				// Realiza a criptografia simetrica, depois o envelope
@@ -71,7 +71,7 @@ public class ListenerCriarEnv {
 				chaveSimetCript = AlgoritmoRSA.cifrar(dadosAlgoritmo[1], chavePublRSA);
 				break;
 			}
-			*/
+			
 			case "DES":
 			{
 				// Realiza a criptografia simetrica, depois o envelope
