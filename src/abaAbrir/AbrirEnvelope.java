@@ -12,6 +12,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import java.io.File;
 
 public class AbrirEnvelope {
 	static JPanel painelAbreEnv, painelResultados;
@@ -54,8 +55,9 @@ public class AbrirEnvelope {
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							JFileChooser fc = new JFileChooser();
-							int i = fc.showOpenDialog(subpainelArqCript);
+							fc.setCurrentDirectory(new File("."));
 
+							int i = fc.showOpenDialog(subpainelArqCript);
 							if (i == JFileChooser.APPROVE_OPTION)
 							{
 								msgCript = GerenciadorArquivos.lerArq(fc.getSelectedFile());
@@ -103,8 +105,9 @@ public class AbrirEnvelope {
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							JFileChooser fc = new JFileChooser();
-							int i = fc.showOpenDialog(subpainelChaveCript);
+							fc.setCurrentDirectory(new File("."));
 
+							int i = fc.showOpenDialog(subpainelChaveCript);
 							if (i == JFileChooser.APPROVE_OPTION)
 							{
 								chaveCript = GerenciadorArquivos.lerArq(fc.getSelectedFile());
@@ -152,8 +155,9 @@ public class AbrirEnvelope {
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							JFileChooser fc = new JFileChooser();
-							int i = fc.showOpenDialog(subpainelArqChavePrivDest);
+							fc.setCurrentDirectory(new File("."));
 
+							int i = fc.showOpenDialog(subpainelArqChavePrivDest);
 							if (i == JFileChooser.APPROVE_OPTION)
 							{
 								chavePrivRSA = GerenciadorArquivos.lerArq(fc.getSelectedFile());

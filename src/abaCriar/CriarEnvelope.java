@@ -4,6 +4,8 @@ import funcionalidades.GerenciadorArquivos;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -55,8 +57,9 @@ public class CriarEnvelope {
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							JFileChooser fc = new JFileChooser();
-							int i = fc.showOpenDialog(subpainelArqTextoEmClaro);
+							fc.setCurrentDirectory(new File("."));
 
+							int i = fc.showOpenDialog(subpainelArqTextoEmClaro);
 							if (i == JFileChooser.APPROVE_OPTION)
 							{
 								texto = GerenciadorArquivos.lerArq(fc.getSelectedFile());
@@ -104,8 +107,9 @@ public class CriarEnvelope {
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							JFileChooser fc = new JFileChooser();
-							int i = fc.showOpenDialog(subpainelArqChaveRSAdest);
+							fc.setCurrentDirectory(new File("."));
 
+							int i = fc.showOpenDialog(subpainelArqChaveRSAdest);
 							if (i == JFileChooser.APPROVE_OPTION)
 							{
 								chaveRSA = GerenciadorArquivos.lerArq(fc.getSelectedFile());
