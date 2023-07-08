@@ -60,7 +60,7 @@ public class ListenerAbrirEnv {
 		byte[] textoEmClaro = new byte[2];
 		switch (algoritmo)
 		{
-			/*
+			
 			case "AES":
 			{
 				// Decifra o envelope, depois a criptografia simetrica
@@ -68,7 +68,7 @@ public class ListenerAbrirEnv {
 				textoEmClaro = AlgoritmoAES.decifrar(msgCript  , chaveSimet);
 				break;
 			}
-			*/
+			
 			case "DES":
 			{
 				// Decifra o envelope, depois a criptografia simetrica
