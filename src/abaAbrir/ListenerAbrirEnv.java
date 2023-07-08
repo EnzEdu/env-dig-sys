@@ -7,37 +7,32 @@ public class ListenerAbrirEnv {
 	public static String clicouBotaoGerar(byte[] msgCript, byte[] chaveCript,
 			byte[] chavePrivRSA, String algoritmo, String nomeArqMsgDecif) {
 
-		// Instancia as versoes em String para verificacoes
-		String strMsgCript = new String(msgCript);
-		String strChavePrivRSA = new String(chavePrivRSA);
-		String strChaveCript = new String(chaveCript);
-
 		// Verifica se o arquivo de mensagem criptografada esta vazio
-		if (strMsgCript == null || strMsgCript.isBlank() == true)
+		if (msgCript == null || msgCript.length == 0)
 		{
 			return "1 - Arquivo de texto vazio.";
 		}
 
+		// Verifica se o arquivo de chave criptografada esta vazio
+		else
+		if (chaveCript == null || chaveCript.length == 0)
+		{
+			return "1 - Arquivo de chave simétrica criptografada vazio.";
+		}
+
 		// Verifica se o arquivo da chave privada RSA esta vazio
 		else
-		if (strChavePrivRSA == null || strChavePrivRSA.isBlank() == true)
+		if (chavePrivRSA == null || chavePrivRSA.length == 0)
 		{
 			return "1 - Arquivo de chave RSA vazio.";
 		}
 
 		// Verifica se o arquivo da chave privada RSA utiliza o padrão OpenSSL
 		else
-		if (strChavePrivRSA.trim().startsWith("-----BEGIN PRIVATE KEY-----") == false ||
-			strChavePrivRSA.trim().endsWith("-----END PRIVATE KEY-----") == false)
+		if (new String(chavePrivRSA).trim().startsWith("-----BEGIN PRIVATE KEY-----") == false ||
+			new String(chavePrivRSA).trim().endsWith("-----END PRIVATE KEY-----") == false)
 		{
 			return "1 - Arquivo de chave RSA fora do padrão OpenSSL.";
-		}
-
-		// Verifica se o arquivo de chave criptografada esta vazio
-		else
-		if (strChaveCript == null || strChaveCript.isBlank() == true)
-		{
-			return "1 - Arquivo de chave simétrica criptografada vazio.";
 		}
 
 		// Verifica se foi escolhido um algoritmo
@@ -60,7 +55,6 @@ public class ListenerAbrirEnv {
 		byte[] textoEmClaro = new byte[2];
 		switch (algoritmo)
 		{
-			
 			case "AES":
 			{
 				// Decifra o envelope, depois a criptografia simetrica
@@ -68,7 +62,7 @@ public class ListenerAbrirEnv {
 				textoEmClaro = AlgoritmoAES.decifrar(msgCript  , chaveSimet);
 				break;
 			}
-			
+
 			case "DES":
 			{
 				// Decifra o envelope, depois a criptografia simetrica

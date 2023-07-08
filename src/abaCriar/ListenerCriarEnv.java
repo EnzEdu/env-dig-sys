@@ -7,27 +7,23 @@ public class ListenerCriarEnv {
 	public static String clicouBotaoGerar(byte[] texto, byte[] chavePublRSA,
 			String algoritmo, String nomeArqChaveAss, String nomeArqTextoCript) {
 
-		// Instancia as versoes em String para verificacoes
-		String strTexto = new String(texto);
-		String strChavePublRSA = new String(chavePublRSA);
-
 		// Verifica se o arquivo de texto esta vazio
-		if (strTexto == null || strTexto.isBlank() == true)
+		if (texto == null || texto.length == 0)
 		{
 			return "1 - Arquivo de texto vazio.";
 		}
 
 		// Verifica se o arquivo da chave publica RSA esta vazio
 		else
-		if (strChavePublRSA == null || strChavePublRSA.isBlank() == true)
+		if (chavePublRSA == null || chavePublRSA.length == 0)
 		{
 			return "1 - Arquivo de chave RSA vazio.";
 		}
 
 		// Verifica se o arquivo da chave publica RSA utiliza o padrão OpenSSL
 		else
-		if (strChavePublRSA.trim().startsWith("-----BEGIN PUBLIC KEY-----") == false ||
-			strChavePublRSA.trim().endsWith("-----END PUBLIC KEY-----") == false)
+		if (new String(chavePublRSA).trim().startsWith("-----BEGIN PUBLIC KEY-----") == false ||
+			new String(chavePublRSA).trim().endsWith("-----END PUBLIC KEY-----") == false)
 		{
 			return "1 - Arquivo de chave RSA fora do padrão OpenSSL.";
 		}
@@ -63,7 +59,6 @@ public class ListenerCriarEnv {
 		byte[] chaveSimetCript = new byte[2];
 		switch (algoritmo)
 		{
-			
 			case "AES":
 			{
 				// Realiza a criptografia simetrica, depois o envelope
@@ -71,7 +66,7 @@ public class ListenerCriarEnv {
 				chaveSimetCript = AlgoritmoRSA.cifrar(dadosAlgoritmo[1], chavePublRSA);
 				break;
 			}
-			
+
 			case "DES":
 			{
 				// Realiza a criptografia simetrica, depois o envelope
