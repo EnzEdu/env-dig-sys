@@ -7,42 +7,42 @@ public class ListenerAbrirEnv {
 	public static String clicouBotaoGerar(byte[] msgCript, byte[] chaveCript,
 			byte[] chavePrivRSA, String algoritmo, String nomeArqMsgDecif) {
 
-		// Verifica se o arquivo de mensagem criptografada esta vazio
+		// Verifica se o arquivo de mensagem criptografada esta vazio ou se o usu·rio n„o o selecionou
 		if (msgCript == null || msgCript.length == 0)
 		{
-			return "1 - Arquivo de texto vazio.";
+			return "1 - Arquivo de texto vazio/n„o selecionado.";
 		}
 
-		// Verifica se o arquivo de chave criptografada esta vazio
+		// Verifica se o arquivo de chave criptografada esta vazio ou se o usu·rio n„o o selecionou
 		else
 		if (chaveCript == null || chaveCript.length == 0)
 		{
-			return "1 - Arquivo de chave sim√©trica criptografada vazio.";
+			return "1 - Arquivo de chave simÈtrica criptografada vazio/n„o selecionado.";
 		}
 
-		// Verifica se o arquivo da chave privada RSA esta vazio
+		// Verifica se o arquivo da chave privada RSA esta vazio ou se o usu·rio n„o o selecionou
 		else
 		if (chavePrivRSA == null || chavePrivRSA.length == 0)
 		{
-			return "1 - Arquivo de chave RSA vazio.";
+			return "1 - Arquivo de chave RSA vazio/n„o selecionado.";
 		}
 
-		// Verifica se o arquivo da chave privada RSA utiliza o padr√£o OpenSSL
+		// Verifica se o arquivo da chave privada RSA utiliza o padr„o de chaves geradas pela nossa aplicaÁ„o (header e footer)
 		else
 		if (new String(chavePrivRSA).trim().startsWith("-----BEGIN PRIVATE KEY-----") == false ||
 			new String(chavePrivRSA).trim().endsWith("-----END PRIVATE KEY-----") == false)
 		{
-			return "1 - Arquivo de chave RSA fora do padr√£o OpenSSL.";
+			return "1 - Arquivo de chave RSA fora do padr„o da aplicaÁ„o.";
 		}
 
 		// Verifica se foi escolhido um algoritmo
 		else
 		if (algoritmo == null || algoritmo.isBlank() == true || algoritmo.equals("-"))
 		{
-			return "1 - Algoritmo de criptografia n√£o escolhido.";
+			return "1 - Algoritmo de criptografia n„o selecionado.";
 		}
 
-		// Verifica se o arquivo de mensagem decifrada esta vazio
+		// Verifica se o nome arquivo de mensagem decifrada esta vazio
 		else
 		if (nomeArqMsgDecif == null || nomeArqMsgDecif.isBlank() == true)
 		{
