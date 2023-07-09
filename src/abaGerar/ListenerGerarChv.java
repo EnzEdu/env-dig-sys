@@ -9,14 +9,14 @@ public class ListenerGerarChv {
 		// Verifica se o nome do arquivo de chave publica esta vazio
 		if (nomeChavePubl == null || nomeChavePubl.isBlank() == true)
 		{
-			return "1 - Nome do arquivo de chave publica vazio.";
+			return "1 - Arquivo de chave publica vazio.";
 		}
 
 		// Verifica se o nome do arquivo de chave privada esta vazio
 		else
 		if (nomeChavePriv == null || nomeChavePriv.isBlank() == true)
 		{
-			return "1 - Nome do arquivo de chave privada vazio.";
+			return "1 - Arquivo de chave privada vazio.";
 		}
 
 

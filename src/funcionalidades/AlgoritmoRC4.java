@@ -39,7 +39,7 @@ public class AlgoritmoRC4 {
 	}
 
 
-	public static byte[] decifrar(byte[] textoCript, byte[] chaveSimet) {
+	public static byte[] decifrar(byte[] textoCript, byte[] chaveSimet, StringBuilder resultado) {
 		byte[] textoEmClaro = new byte[2];
 
 		try {
@@ -53,7 +53,8 @@ public class AlgoritmoRC4 {
 			textoEmClaro = cifrador.doFinal(textoCript);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			resultado.delete(0, resultado.length());
+			resultado.append("2 - Ocorreu um erro na decifragem do arquivo.");
 		}
 
 		return textoEmClaro;

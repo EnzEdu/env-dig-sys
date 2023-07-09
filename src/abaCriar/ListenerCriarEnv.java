@@ -7,32 +7,32 @@ public class ListenerCriarEnv {
 	public static String clicouBotaoGerar(byte[] texto, byte[] chavePublRSA,
 			String algoritmo, String nomeArqChaveAss, String nomeArqTextoCript) {
 
-		// Verifica se o arquivo de texto esta vazio ou se o usu·rio n„o o selecionou
+		// Verifica se o arquivo de texto esta vazio
 		if (texto == null || texto.length == 0)
 		{
-			return "1 - Arquivo de texto vazio/n„o selecionado.";
+			return "1 - Arquivo de texto vazio.";
 		}
 
-		// Verifica se o arquivo da chave publica RSA esta vazio ou se o usu·rio n„o o selecionou
+		// Verifica se o arquivo da chave publica RSA esta vazio
 		else
 		if (chavePublRSA == null || chavePublRSA.length == 0)
 		{
-			return "1 - Arquivo de chave RSA vazio/n„o selecionado.";
+			return "1 - Arquivo de chave RSA vazio.";
 		}
 
-		// Verifica se o arquivo da chave publica RSA utiliza o padr„o da nossa aplicaÁ„o (header e footer)
+		// Verifica se o arquivo da chave publica RSA utiliza o padr√£o OpenSSL
 		else
 		if (new String(chavePublRSA).trim().startsWith("-----BEGIN PUBLIC KEY-----") == false ||
 			new String(chavePublRSA).trim().endsWith("-----END PUBLIC KEY-----") == false)
 		{
-			return "1 - Arquivo de chave RSA fora do padr„o da aplicaÁ„o.";
+			return "1 - Arquivo de chave RSA fora do padr√£o OpenSSL.";
 		}
 
 		// Verifica se foi escolhido um algoritmo
 		else
 		if (algoritmo == null || algoritmo.isBlank() == true || algoritmo.equals("-"))
 		{
-			return "1 - Algoritmo de criptografia n„o selecionado.";
+			return "1 - Algoritmo de criptografia n√£o escolhido.";
 		}
 
 		// Verifica se o nome do arquivo da chave assinada esta vazio

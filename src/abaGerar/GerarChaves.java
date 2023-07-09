@@ -133,15 +133,21 @@ public class GerarChaves {
 				break;
 			}
 
-			case 1:	// Operacao falhou
+			case 1:	// Erro nos arquivos
 			{
 				labelResult.setForeground(Color.RED);
 				break;
 			}
 
+			case 2: // Erro nos algoritmos
+			{
+				labelResult.setForeground(Color.ORANGE);
+				break;
+			}
+
 			default:
 			{
-				labelResult.setForeground(Color.BLUE);
+				labelResult.setForeground(Color.BLACK);
 				break;
 			}
 		}
