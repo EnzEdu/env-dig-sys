@@ -161,23 +161,6 @@ public class CriarEnvelope {
 			painelGeracao.setBorder(BorderFactory.createEmptyBorder(50, 10, 0, 10));
 
 
-				// Subpainel do arquivo de saida com a chave assinada
-				JPanel subpainelArqChaveAss = new JPanel();
-
-					// Label do arquivo de chave assinada
-					JLabel labelArqChaveAss = new JLabel("Nome do Arquivo de Chave Assinada: ");
-
-					// Nome do arquivo
-					JTextArea nomeArqChaveAss = new JTextArea(0, 0);
-					nomeArqChaveAss.setBounds(120,0,200,20);
-					nomeArqChaveAss.setLineWrap(true);
-					nomeArqChaveAss.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
-					// Preenche o subpainel com os componentes
-					subpainelArqChaveAss.add(labelArqChaveAss);
-					subpainelArqChaveAss.add(nomeArqChaveAss);
-
-
 				// Subpainel do arquivo de saida com o texto criptografado
 				JPanel subpainelArqTextoCript = new JPanel();
 
@@ -193,6 +176,23 @@ public class CriarEnvelope {
 					// Preenche o subpainel com os componentes
 					subpainelArqTextoCript.add(labelArqTextoCript);
 					subpainelArqTextoCript.add(nomeArqTextoCript);
+
+
+				// Subpainel do arquivo de saida com a chave assinada
+				JPanel subpainelArqChaveAss = new JPanel();
+
+					// Label do arquivo de chave assinada
+					JLabel labelArqChaveAss = new JLabel("Nome do Arquivo de Chave Assinada: ");
+
+					// Nome do arquivo
+					JTextArea nomeArqChaveAss = new JTextArea(0, 0);
+					nomeArqChaveAss.setBounds(120,0,200,20);
+					nomeArqChaveAss.setLineWrap(true);
+					nomeArqChaveAss.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+					// Preenche o subpainel com os componentes
+					subpainelArqChaveAss.add(labelArqChaveAss);
+					subpainelArqChaveAss.add(nomeArqChaveAss);
 
 
 				// Subpainel do botao de confirmacao
@@ -213,8 +213,8 @@ public class CriarEnvelope {
 
 
 				// Preenche o painel principal
-				painelGeracao.add(subpainelArqChaveAss);
 				painelGeracao.add(subpainelArqTextoCript);
+				painelGeracao.add(subpainelArqChaveAss);
 				painelGeracao.add(subpainelBotaoGerar);
 			//-----------------------Gerar Arquivos----------------------//
 
