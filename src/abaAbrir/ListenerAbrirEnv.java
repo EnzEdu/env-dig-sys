@@ -51,7 +51,7 @@ public class ListenerAbrirEnv {
 
 
 		// Recebe o texto decifrado com base no algoritmo escolhido
-		StringBuilder msgResultado = new StringBuilder("");
+		StringBuilder msgResultado = new StringBuilder("-");
 		byte[] chaveSimet = new byte[2];
 		byte[] textoEmClaro = new byte[2];
 		switch (algoritmo)
